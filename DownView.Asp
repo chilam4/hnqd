@@ -56,7 +56,7 @@ set rs=nothing
         </tr>
       </table>
       <!--#include file="Center_Left.asp" --></td>
-    <td width="773" valign="top"><table width="733" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:19px;">
+    <td width="773" valign="top" style="background-color:#fff;"><table width="733" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-top:19px;">
         <tr>
           <td width="733" style="background:url(images/bg1.gif) repeat-x left bottom;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
