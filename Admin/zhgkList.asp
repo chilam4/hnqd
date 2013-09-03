@@ -12,9 +12,9 @@ end if
 <script language="javascript" src="../Scripts/Admin.js"></script>
 <br />
 <table class="tableBorder" width="95%" border="0" align="center" cellpadding="5" cellspacing="1">
-<form action="DelContent.asp?Result=About" method="post" name="formDel">
+<form action="DelContent.asp?Result=Zhgk" method="post" name="formDel">
   <tr>
-    <th height="22" colspan="10" sytle="line-height:150%">【企业信息管理】</th>
+    <th height="22" colspan="10" sytle="line-height:150%">【展会概况管理】</th>
   </tr>
   <tr>
     <th>ID</th>
@@ -28,13 +28,13 @@ end if
 	<th>操作</th>
 	<th>选择</th>
   </tr>
-  <% AboutList() %>
+  <% ZhgkList() %>
   </form>
 </table>
 <% if request.QueryString("Result")="ModifySequence" then call ModifySequence() %>
 <% if request.QueryString("Result")="SaveSequence" then call SaveSequence() %>
 <%
-function AboutList()
+function ZhgkList()
   dim idCount
   dim pages
       pages=20
@@ -46,7 +46,7 @@ function AboutList()
   dim pagenmax
   dim pagenmin
   dim datafrom
-      datafrom="Qianbo_About"
+      datafrom="Qianbo_Zhgk"
   dim datawhere
       datawhere=""
   dim sqlid
@@ -101,7 +101,7 @@ function AboutList()
       else
         Response.Write "<td nowrap align='center' class=""forumRow"" width=""40""><a href=""Conversion.asp?id="&rs("ID")&"&LX="&datafrom&"&Operation=up""><font color='red'>未生效</font></a></td>" & vbCrLf
 	  end If
-      Response.Write "<td nowrap class=""forumRow""><a href='AboutEdit.asp?Result=Modify&ID="&rs("ID")&"' title="""&rs("AboutName")&""">"&StrLeft(rs("AboutName"),28)&"</a>"& vbCrLf
+      Response.Write "<td nowrap class=""forumRow""><a href='ZhgkEdit.asp?Result=Modify&ID="&rs("ID")&"' title="""&rs("AboutName")&""">"&StrLeft(rs("AboutName"),28)&"</a>"& vbCrLf
       if rs("ChildFlag") Then
       Response.Write "<font color='blue'>分页</font>" & vbCrLf
 	  Else
@@ -117,7 +117,7 @@ function AboutList()
       Response.Write "<td nowrap align='center' class=""forumRow""><font color='blue'>"&rs("Sequence")&"</font></td>" & vbCrLf
       Response.Write "<td nowrap class=""forumRow"">"&rs("AddTime")&"</td>" & vbCrLf
 	  Response.Write "<td nowrap align='center' class=""forumRow"">"&rs("ClickNumber")&"</td>" & vbCrLf
-      Response.Write "<td align=""center""nowrap class=""forumRow""><a href='AboutEdit.asp?Result=Add'>添加</a> <a href='AboutEdit.asp?Result=Modify&ID="&rs("ID")&"'>修改</a> <a href='AboutList.asp?Result=ModifySequence&ID="&rs("ID")&"'>排序</a></td>" & vbCrLf
+      Response.Write "<td align=""center""nowrap class=""forumRow""><a href='ZhgkEdit.asp?Result=Add'>添加</a> <a href='ZhgkEdit.asp?Result=Modify&ID="&rs("ID")&"'>修改</a> <a href='ZhgkList.asp?Result=ModifySequence&ID="&rs("ID")&"'>排序</a></td>" & vbCrLf
  	  Response.Write "<td nowrap align='center' class=""forumRow""><input name='selectID' type='checkbox' value='"&rs("ID")&"'></td>" & vbCrLf
       Response.Write "</tr>" & vbCrLf
 	  rs.movenext
@@ -126,7 +126,7 @@ function AboutList()
     Response.Write "<td colspan='10' nowrap align=""right"" class=""forumRow""><input onClick=""CheckAll(this.form)"" name=""buttonAllSelect"" type=""button"" id=""submitAllSearch"" value=""全选""> <input onClick=""CheckOthers(this.form)"" name=""buttonOtherSelect"" type=""button"" id=""submitOtherSelect"" value=""反选""> <input name='submitDelSelect' type='button' id='submitDelSelect' value='删除所选' onClick='ConfirmDel(""是否确定删除？删除后不能恢复！"");'></td>" & vbCrLf
     Response.Write "</tr>" & vbCrLf
   else
-    response.write "<tr><td nowrap align='center' colspan='10' class=""forumRow"">暂无企业信息</td></tr>"
+    response.write "<tr><td nowrap align='center' colspan='10' class=""forumRow"">暂无展会概况</td></tr>"
   end if
   Response.Write "<tr>" & vbCrLf
   Response.Write "<td colspan='10' nowrap class=""forumRow"">" & vbCrLf
@@ -178,7 +178,7 @@ sub ModifySequence()
   dim rs,sql,ID,AboutName,Sequence
   ID=request.QueryString("ID")
   set rs = server.createobject("adodb.recordset")
-  sql="select * from Qianbo_About where ID="& ID
+  sql="select * from Qianbo_Zhgk where ID="& ID
   rs.open sql,conn,1,1
   AboutName=rs("AboutName")
   Sequence=rs("Sequence")
@@ -186,9 +186,9 @@ sub ModifySequence()
   set rs=nothing
   response.write "<br />"
   response.write "<table width='100%' border='0' cellpadding='3' cellspacing='0'>"
-  response.write "<form action='AboutList.asp?Result=SaveSequence' method='post' name='formSequence'>"
+  response.write "<form action='ZhgkList.asp?Result=SaveSequence' method='post' name='formSequence'>"
   response.write "<tr>"
-  response.write "<td height='24' align='center' nowrap>ID：<input name='ID' type='text' style='width: 28;' value='"&ID&"' maxlength='4' readonly> 企业信息名称：<input name='AboutName' type='text' id='AboutName' style='width: 180;' value='"&AboutName&"' maxlength='35' readonly> 排序号：<input name='Sequence' type='text' style='width: 60;' value='"&Sequence&"' maxlength='4' onKeyDown='if(event.keyCode==13)event.returnValue=false' onchange=""if(/\D/.test(this.value)){alert('序号必须为整数！');this.value='"&Sequence&"';}""> <input name='submitSequence' type='submit' class='button' value='保存'></td>"
+  response.write "<td height='24' align='center' nowrap>ID：<input name='ID' type='text' style='width: 28;' value='"&ID&"' maxlength='4' readonly> 展会概况名称：<input name='AboutName' type='text' id='AboutName' style='width: 180;' value='"&AboutName&"' maxlength='35' readonly> 排序号：<input name='Sequence' type='text' style='width: 60;' value='"&Sequence&"' maxlength='4' onKeyDown='if(event.keyCode==13)event.returnValue=false' onchange=""if(/\D/.test(this.value)){alert('序号必须为整数！');this.value='"&Sequence&"';}""> <input name='submitSequence' type='submit' class='button' value='保存'></td>"
   response.write "</tr>"
   response.write "</form>"
   response.write "</table>"
@@ -197,12 +197,12 @@ end sub
 sub SaveSequence()
   dim rs,sql
   set rs = server.createobject("adodb.recordset")
-  sql="select * from Qianbo_About where ID="& request.form("ID")
+  sql="select * from Qianbo_Zhgk where ID="& request.form("ID")
   rs.open sql,conn,1,3
   rs("Sequence")=request.form("Sequence")
   rs.update
   rs.close
   set rs=nothing
-  response.redirect "AboutList.asp"
+  response.redirect "ZhgkList.asp"
 end sub
 %>

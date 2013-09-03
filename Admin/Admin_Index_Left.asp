@@ -40,8 +40,8 @@
                 Response.Write "<li><a href=""NewsEdit.asp?Result=Add"" target=""main_right"">添加新闻</a></li>"&vbCrlf
                 Response.Write "<li><a href=""AboutList.asp"" target=""main_right"">企业信息列表</a></li>"&vbCrlf
                 Response.Write "<li><a href=""AboutEdit.asp?Result=Add"" target=""main_right"">添加企业信息</a></li>"&vbCrlf
-				Response.Write "<li><a href=""zhgkList.asp"" target=""main_right"">展会概况列表</a></li>"&vbCrlf
-                Response.Write "<li><a href=""zhgkEdit.asp?Result=Add"" target=""main_right"">添加展会概况</a></li>"&vbCrlf
+				Response.Write "<li><a href=""ZhgkList.asp"" target=""main_right"">展会概况列表</a></li>"&vbCrlf
+                Response.Write "<li><a href=""ZhgkEdit.asp?Result=Add"" target=""main_right"">添加展会概况</a></li>"&vbCrlf
 			end if
 			if ID="Product" then
 				Response.Write "<li><a href=""ProductSort.asp?Action=Add&ParentID=0"" target=""main_right"">产品类别管理</a></li>"&vbCrlf
